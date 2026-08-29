@@ -1,0 +1,2 @@
+"""Youjikexun backend application."""
+

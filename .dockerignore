@@ -1,0 +1,14 @@
+# Never bake secrets or local config into the Docker image.
+# Railway injects env vars at runtime; the app reads them via os.getenv.
+.env
+.env.*
+!.env.example
+.git
+.gitignore
+node_modules
+dist
+__pycache__
+*.pyc
+.pytest_cache
+.venv
+development-logs
