@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# JavaScript
+node_modules/
+dist/
+
+# Local secrets: never commit (demo uses synthetic committed data instead)
+.env
+.env.*
+!.env.example
+
+# Runtime append-only logs (regenerated locally; synthetic seed data is committed)
+backend/data/user_entries.jsonl
+backend/data/hardware_max30102.jsonl
+
+# PlatformIO build artifacts
+hardware/*/.pio/
+hardware/*/.pio
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/

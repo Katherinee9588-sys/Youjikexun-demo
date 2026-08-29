@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Youjikexun Legacy Import Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "date",
+    "day_number",
+    "user_input",
+    "feedback"
+  ],
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "day_number": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "user_input": {
+      "type": "string",
+      "minLength": 1
+    },
+    "feedback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hot",
+        "cold"
+      ],
+      "properties": {
+        "hot": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cold": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

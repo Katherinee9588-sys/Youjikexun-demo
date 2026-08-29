@@ -1,0 +1,26 @@
+# Render — https://render.com
+# 1. New → Web Service → connect Youjikexun-demo repo
+# 2. Render reads this blueprint.
+# 3. Add environment variables (LLM_*, ASR_*) in the Render dashboard.
+# Note: Render free tier sleeps after 15min inactivity. For a always-on demo
+# use a paid plan ($7/mo). Persistent disk is paid-only.
+
+services:
+  - type: web
+    name: youjikexun
+    runtime: python
+    plan: starter            # free = sleeps; starter = always-on
+    buildCommand: |
+      cd frontend && npm install && npm run build && \
+      cd .. && mkdir -p backend/static && cp -r frontend/dist/* backend/static/
+    startCommand: cd backend && PYTHONPATH=. uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      # Add these in the Render dashboard (do NOT commit keys):
+      # LLM_API_KEY, LLM_BASE_URL, LLM_MODEL, ASR_API_KEY, ASR_BASE_URL, ASR_MODEL
+    disk:
+      name: data
+      mountPath: /opt/render/project/src/backend/data
+      sizeGB: 1              # paid plans only
